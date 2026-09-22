@@ -16,9 +16,6 @@ function ResumeDetails() {
   const [analysis, setAnalysis] = useState(null);
 
   useEffect(() => {
-    loadResume();
-  }, [id]);
-
   async function loadResume() {
     try {
       setLoading(true);
@@ -33,6 +30,9 @@ function ResumeDetails() {
     }
   }
 
+  loadResume();
+}, [id]);
+
   async function handleAnalyze() {
     try {
       setAnalyzing(true);
@@ -45,6 +45,14 @@ function ResumeDetails() {
     } finally {
       setAnalyzing(false);
     }
+  }
+
+  function formatDate(value) {
+    if (!value) {
+      return "Unknown date";
+    }
+
+    return new Date(value).toLocaleDateString();
   }
 
   if (loading) {
@@ -103,14 +111,6 @@ function ResumeDetails() {
         )}
       </div>
     );
-  }
-
-  function formatDate(value) {
-    if (!value) {
-      return "Unknown date";
-    }
-
-    return new Date(value).toLocaleDateString();
   }
 
   return (
@@ -244,46 +244,86 @@ function ResumeDetails() {
             <div className="analysis-section">
               <h3>Skills</h3>
 
-              <p>
-                {analysis.skills || "Not specified"}
-              </p>
+              {Array.isArray(analysis.skills) ? (
+                <ul>
+                  {analysis.skills.map((skill, index) => (
+                    <li key={index}>{skill}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>
+                  {analysis.skills || "Not specified"}
+                </p>
+              )}
             </div>
 
             <div className="analysis-section">
               <h3>Experience</h3>
 
-              <p className="analysis-text">
-                {analysis.experience || "Not specified"}
-              </p>
+              {Array.isArray(analysis.experience) ? (
+                <ul>
+                  {analysis.experience.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="analysis-text">
+                  {analysis.experience || "Not specified"}
+                </p>
+              )}
             </div>
 
             <div className="analysis-section">
               <h3>Education</h3>
 
-              <p className="analysis-text">
-                {analysis.education || "Not specified"}
-              </p>
+              {Array.isArray(analysis.education) ? (
+                <ul>
+                  {analysis.education.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="analysis-text">
+                  {analysis.education || "Not specified"}
+                </p>
+              )}
             </div>
 
             <div className="analysis-section">
               <h3>Certifications</h3>
 
-              <p>
-                {analysis.certifications || "Not specified"}
-              </p>
+              {Array.isArray(analysis.certifications) ? (
+                <ul>
+                  {analysis.certifications.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>
+                  {analysis.certifications || "Not specified"}
+                </p>
+              )}
             </div>
 
             <div className="analysis-section">
               <h3>Keywords</h3>
 
-              <p>
-                {analysis.keywords || "Not specified"}
-              </p>
+              {Array.isArray(analysis.keywords) ? (
+                <ul>
+                  {analysis.keywords.map((keyword, index) => (
+                    <li key={index}>{keyword}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>
+                  {analysis.keywords || "Not specified"}
+                </p>
+              )}
             </div>
 
             <button
               type="button"
-              className="secondary-button"
+              className="primary-button"
               onClick={handleAnalyze}
             >
               Analyze Again
@@ -296,4 +336,3 @@ function ResumeDetails() {
 }
 
 export default ResumeDetails;
-
