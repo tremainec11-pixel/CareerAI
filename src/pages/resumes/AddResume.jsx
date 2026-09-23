@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadResume } from "../../services/resumeService";
 
 function AddResume() {
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  function handleChooseFile() {
+    fileInputRef.current?.click();
+  }
 
   function handleFileChange(event) {
     const selectedFile = event.target.files?.[0];
@@ -64,10 +69,11 @@ function AddResume() {
             className="back-link back-button"
             onClick={() => navigate("/resumes")}
           >
-            ? Back to Resumes
+            ← Back to Resumes
           </button>
 
           <h1 className="page-title">Add Resume</h1>
+
           <p className="page-subtitle">
             Upload your resume to analyze your career profile
           </p>
@@ -88,7 +94,7 @@ function AddResume() {
         <form onSubmit={handleSubmit}>
           <div className="resume-upload-area">
             <div className="resume-upload-icon">
-              ?
+              ↑
             </div>
 
             <h3>
@@ -101,14 +107,17 @@ function AddResume() {
                 : "PDF, DOC, or DOCX files are supported."}
             </p>
 
-            <label
-              htmlFor="resume-file"
+            <button
+              type="button"
               className="secondary-button upload-file-button"
+              onClick={handleChooseFile}
+              disabled={loading}
             >
               {file ? "Change File" : "Choose File"}
-            </label>
+            </button>
 
             <input
+              ref={fileInputRef}
               id="resume-file"
               type="file"
               accept=".pdf,.doc,.docx"
@@ -118,7 +127,6 @@ function AddResume() {
                 width: "1px",
                 height: "1px",
                 opacity: 0,
-                pointerEvents: "none",
               }}
             />
           </div>
