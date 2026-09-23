@@ -107,28 +107,13 @@ function AddResume() {
                 : "PDF, DOC, or DOCX files are supported."}
             </p>
 
-            <button
-              type="button"
-              className="secondary-button upload-file-button"
-              onClick={handleChooseFile}
-              disabled={loading}
-            >
-              {file ? "Change File" : "Choose File"}
-            </button>
-
             <input
-              ref={fileInputRef}
-              id="resume-file"
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-              style={{
-                position: "absolute",
-                width: "1px",
-                height: "1px",
-                opacity: 0,
-              }}
-            />
+  id="resume-file"
+  type="file"
+  accept=".pdf,.doc,.docx"
+  onChange={handleFileChange}
+  className="resume-file-input"
+/>
           </div>
 
           {error && (
