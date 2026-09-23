@@ -92,7 +92,17 @@ function AddResume() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="resume-upload-area">
+          <div
+            className="resume-upload-area"
+            onClick={handleChooseFile}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                handleChooseFile();
+              }
+            }}
+          >
             <div className="resume-upload-icon">
               ↑
             </div>
@@ -108,12 +118,14 @@ function AddResume() {
             </p>
 
             <input
-  id="resume-file"
-  type="file"
-  accept=".pdf,.doc,.docx"
-  onChange={handleFileChange}
-  className="resume-file-input"
-/>
+              ref={fileInputRef}
+              id="resume-file"
+              type="file"
+              accept=".pdf,.doc,.docx"
+              onChange={handleFileChange}
+              className="resume-file-input"
+              onClick={(event) => event.stopPropagation()}
+            />
           </div>
 
           {error && (
@@ -147,3 +159,4 @@ function AddResume() {
 }
 
 export default AddResume;
+
