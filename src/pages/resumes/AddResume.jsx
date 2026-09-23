@@ -10,10 +10,6 @@ function AddResume() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  function handleChooseFile() {
-    fileInputRef.current?.click();
-  }
-
   function handleFileChange(event) {
     const selectedFile = event.target.files?.[0];
 
@@ -92,16 +88,10 @@ function AddResume() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div
+          <label
+            htmlFor="resume-file"
             className="resume-upload-area"
-            onClick={handleChooseFile}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                handleChooseFile();
-              }
-            }}
+            style={{ cursor: "pointer" }}
           >
             <div className="resume-upload-icon">
               ↑
@@ -121,12 +111,11 @@ function AddResume() {
               ref={fileInputRef}
               id="resume-file"
               type="file"
-              accept=".pdf,.doc,.docx"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               onChange={handleFileChange}
               className="resume-file-input"
-              onClick={(event) => event.stopPropagation()}
             />
-          </div>
+          </label>
 
           {error && (
             <p className="error-message">
