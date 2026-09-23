@@ -64,14 +64,12 @@ function AddResume() {
             className="back-link back-button"
             onClick={() => navigate("/resumes")}
           >
-            ← Back to Resumes
+            ? Back to Resumes
           </button>
 
           <h1 className="page-title">Add Resume</h1>
-
           <p className="page-subtitle">
             Upload your resume to analyze your career profile
-            with CareerAI.
           </p>
         </div>
       </div>
@@ -90,7 +88,7 @@ function AddResume() {
         <form onSubmit={handleSubmit}>
           <div className="resume-upload-area">
             <div className="resume-upload-icon">
-              ↑
+              ?
             </div>
 
             <h3>
@@ -115,7 +113,13 @@ function AddResume() {
               type="file"
               accept=".pdf,.doc,.docx"
               onChange={handleFileChange}
-              hidden
+              style={{
+                position: "absolute",
+                width: "1px",
+                height: "1px",
+                opacity: 0,
+                pointerEvents: "none",
+              }}
             />
           </div>
 
