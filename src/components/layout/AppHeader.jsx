@@ -1,16 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-
 function AppHeader() {
-  const navigate = useNavigate();
-  const { user, logout } = useAuth();
-
-  function handleLogout() {
-    logout();
-    navigate("/login");
-  }
-
-  const fullName = user?.full_name || "Nathan Charles";
+  const fullName = "Nathan Charles";
   const firstInitial = fullName.charAt(0).toUpperCase();
 
   return (
@@ -39,14 +28,6 @@ function AppHeader() {
             Career Profile
           </span>
         </div>
-
-        <button
-          type="button"
-          className="logout-button"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
       </div>
     </header>
   );

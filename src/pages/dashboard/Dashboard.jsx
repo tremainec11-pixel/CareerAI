@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
 import { getJobs } from "../../services/jobService";
 import { getApplications } from "../../services/applicationService";
 import { getResumes } from "../../services/resumeService";
 import { getInterviews } from "../../services/interviewService";
 
 function Dashboard() {
-  const { user } = useAuth();
-
   const [jobs, setJobs] = useState([]);
   const [applications, setApplications] = useState([]);
   const [resumes, setResumes] = useState([]);
@@ -54,7 +51,7 @@ function Dashboard() {
           <h1 className="page-title">Dashboard</h1>
 
           <p className="page-subtitle">
-            Welcome back, {user?.full_name}.
+            Manage your career opportunities and applications.
           </p>
         </div>
 
@@ -205,4 +202,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
